@@ -1,0 +1,156 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300">
+  <defs>
+    <!-- Enhanced gradient definitions -->
+    <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#9B6BF2" />
+      <stop offset="50%" stop-color="#8A56E8" />
+      <stop offset="100%" stop-color="#7A41DA" />
+    </linearGradient>
+    
+    <linearGradient id="brainFillGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#9B6BF2" stop-opacity="0.15" />
+      <stop offset="50%" stop-color="#8A56E8" stop-opacity="0.2" />
+      <stop offset="100%" stop-color="#7A41DA" stop-opacity="0.25" />
+    </linearGradient>
+    
+    <linearGradient id="nodeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#33CCFF" />
+      <stop offset="100%" stop-color="#00AADD" />
+    </linearGradient>
+    
+    <!-- Connection line gradient -->
+    <linearGradient id="connectionGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#9B6BF2" stop-opacity="0.4" />
+      <stop offset="100%" stop-color="#33CCFF" stop-opacity="0.4" />
+    </linearGradient>
+    
+    <!-- Improved glow effect -->
+    <filter id="glow" height="300%" width="300%" x="-100%" y="-100%">
+      <feGaussianBlur stdDeviation="4" result="blur" />
+      <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0.4  0 1 0 0 0.4  0 0 1 0 1  0 0 0 18 -7" result="glow" />
+      <feBlend in="SourceGraphic" in2="glow" mode="normal" />
+    </filter>
+    
+    <!-- Text highlight effect -->
+    <filter id="textHighlight" x="-10%" y="-10%" width="120%" height="120%">
+      <feGaussianBlur stdDeviation="2" result="blur" />
+      <feColorMatrix in="blur" type="matrix" values="1 0 0 0 1  0 1 0 0 1  0 0 1 0 1  0 0 0 20 -8" result="highlight" />
+      <feComposite in="SourceGraphic" in2="highlight" operator="over" />
+    </filter>
+    
+    <!-- Pattern for brain texture -->
+    <pattern id="brainPattern" patternUnits="userSpaceOnUse" width="10" height="10" patternTransform="rotate(45)">
+      <line x1="0" y1="5" x2="10" y2="5" stroke="#9B6BF2" stroke-width="1" stroke-opacity="0.2"/>
+    </pattern>
+  </defs>
+  
+  <!-- Background elements for visual interest -->
+  <g class="background-elements">
+    <circle cx="200" cy="160" r="120" fill="url(#brainPattern)" opacity="0.3">
+      <animate attributeName="opacity" values="0.3;0.4;0.3" dur="8s" repeatCount="indefinite" />
+    </circle>
+    
+    <!-- Floating particles in background -->
+    <g class="particles">
+      <circle cx="150" cy="100" r="2" fill="#33CCFF" opacity="0.6">
+        <animate attributeName="cy" values="100;90;100" dur="5s" repeatCount="indefinite" />
+        <animate attributeName="opacity" values="0.6;0.9;0.6" dur="4s" repeatCount="indefinite" />
+      </circle>
+      <circle cx="250" cy="120" r="2" fill="#9B6BF2" opacity="0.6">
+        <animate attributeName="cy" values="120;110;120" dur="6s" repeatCount="indefinite" />
+        <animate attributeName="opacity" values="0.6;0.9;0.6" dur="5s" repeatCount="indefinite" />
+      </circle>
+      <circle cx="170" cy="220" r="2" fill="#7A41DA" opacity="0.6">
+        <animate attributeName="cy" values="220;210;220" dur="7s" repeatCount="indefinite" />
+        <animate attributeName="opacity" values="0.6;0.9;0.6" dur="4.5s" repeatCount="indefinite" />
+      </circle>
+      <circle cx="230" cy="200" r="2" fill="#00AADD" opacity="0.6">
+        <animate attributeName="cy" values="200;190;200" dur="5.5s" repeatCount="indefinite" />
+        <animate attributeName="opacity" values="0.6;0.9;0.6" dur="3.5s" repeatCount="indefinite" />
+      </circle>
+    </g>
+  </g>
+  
+  <!-- Brain shape with fill -->
+  <g class="brain">
+    <path d="M200,80 C240,65 280,90 290,130 C310,160 295,200 255,215 C280,240 255,270 200,260 C145,270 120,240 145,215 C105,200 90,160 110,130 C120,90 160,65 200,80 Z"
+         fill="url(#brainFillGradient)" 
+         stroke="url(#logoGradient)" 
+         stroke-width="6" 
+         stroke-linecap="round">
+      <!-- Subtle pulsing animation -->
+      <animate attributeName="stroke-width" values="6;7;6" dur="3s" repeatCount="indefinite" />
+      <animate attributeName="fill-opacity" values="0.8;1;0.8" dur="4s" repeatCount="indefinite" />
+    </path>
+    
+    <!-- Internal brain connections for visual interest -->
+    <path d="M145,215 C180,190 220,190 255,215" fill="none" stroke="url(#connectionGradient)" stroke-width="3" stroke-dasharray="5,3" opacity="0.7">
+      <animate attributeName="opacity" values="0.7;1;0.7" dur="3s" repeatCount="indefinite" />
+    </path>
+    <path d="M110,130 C150,170 250,170 290,130" fill="none" stroke="url(#connectionGradient)" stroke-width="3" stroke-dasharray="5,3" opacity="0.7">
+      <animate attributeName="opacity" values="0.7;1;0.7" dur="3s" repeatCount="indefinite" begin="1.5s" />
+    </path>
+    <path d="M200,80 C200,140 200,200 200,260" fill="none" stroke="url(#connectionGradient)" stroke-width="3" stroke-dasharray="5,3" opacity="0.7">
+      <animate attributeName="opacity" values="0.7;1;0.7" dur="3s" repeatCount="indefinite" begin="0.75s" />
+    </path>
+  </g>
+  
+  <!-- Connection nodes with hover effect -->
+  <g class="nodes">
+    <circle cx="200" cy="80" r="10" fill="url(#nodeGradient)" filter="url(#glow)">
+      <animate attributeName="r" values="10;12;10" dur="4s" repeatCount="indefinite" begin="0s" />
+    </circle>
+    <circle cx="290" cy="130" r="10" fill="url(#nodeGradient)" filter="url(#glow)">
+      <animate attributeName="r" values="10;12;10" dur="4s" repeatCount="indefinite" begin="0.5s" />
+    </circle>
+    <circle cx="255" cy="215" r="10" fill="url(#nodeGradient)" filter="url(#glow)">
+      <animate attributeName="r" values="10;12;10" dur="4s" repeatCount="indefinite" begin="1s" />
+    </circle>
+    <circle cx="200" cy="260" r="10" fill="url(#nodeGradient)" filter="url(#glow)">
+      <animate attributeName="r" values="10;12;10" dur="4s" repeatCount="indefinite" begin="1.5s" />
+    </circle>
+    <circle cx="145" cy="215" r="10" fill="url(#nodeGradient)" filter="url(#glow)">
+      <animate attributeName="r" values="10;12;10" dur="4s" repeatCount="indefinite" begin="2s" />
+    </circle>
+    <circle cx="110" cy="130" r="10" fill="url(#nodeGradient)" filter="url(#glow)">
+      <animate attributeName="r" values="10;12;10" dur="4s" repeatCount="indefinite" begin="2.5s" />
+    </circle>
+  </g>
+  
+  <!-- Enhanced central node with more dynamic pulse animation -->
+  <circle cx="200" cy="160" r="30" fill="url(#logoGradient)" filter="url(#glow)">
+    <animate attributeName="r" values="30;34;30" dur="2.5s" repeatCount="indefinite" />
+  </circle>
+  
+  <!-- Data flow animations representing neural activity -->
+  <g class="data-flows">
+    <circle cx="0" cy="0" r="4" fill="#8E54E9" filter="url(#glow)">
+      <animateMotion path="M200,110 C220,120 235,135 240,160 C245,185 230,210 200,205" dur="3s" repeatCount="indefinite" />
+    </circle>
+    <circle cx="0" cy="0" r="4" fill="#00BFFF" filter="url(#glow)">
+      <animateMotion path="M200,205 C170,210 155,185 160,160 C165,135 180,120 200,110" dur="3.5s" repeatCount="indefinite" />
+    </circle>
+    <circle cx="0" cy="0" r="3" fill="#9B6BF2" filter="url(#glow)">
+      <animateMotion path="M145,170 C160,180 180,180 200,170 C220,180 240,180 255,170" dur="2.8s" repeatCount="indefinite" />
+    </circle>
+    <circle cx="0" cy="0" r="3" fill="#33CCFF" filter="url(#glow)">
+      <animateMotion path="M255,150 C240,140 220,140 200,150 C180,140 160,140 145,150" dur="2.2s" repeatCount="indefinite" />
+    </circle>
+  </g>
+  
+  <!-- Logo text with glow -->
+  <text x="200" y="160" text-anchor="middle" dominant-baseline="middle" fill="white" font-family="Arial, sans-serif" font-weight="bold" font-size="20" filter="url(#glow)">BB</text>
+  
+  <!-- Company name with highlight effect -->
+  <text x="200" y="210" text-anchor="middle" dominant-baseline="middle" fill="#7A41DA" font-family="Arial, sans-serif" font-weight="bold" font-size="28" filter="url(#textHighlight)">
+    Brain Boosters
+    <!-- Text highlighting animation -->
+    <animate attributeName="font-size" values="28;29;28" dur="3s" repeatCount="indefinite" />
+  </text>
+  
+  <!-- Tagline with subtle animation -->
+  <text x="200" y="235" text-anchor="middle" dominant-baseline="middle" fill="#5D33A8" font-family="Arial, sans-serif" font-size="14">
+    Enhance Your Mental Performance
+    <animate attributeName="opacity" values="0.8;1;0.8" dur="4s" repeatCount="indefinite" />
+  </text>
+</svg>
