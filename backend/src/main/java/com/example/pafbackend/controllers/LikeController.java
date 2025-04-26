@@ -12,6 +12,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/likes")
 public class LikeController {
+    
 
     private final LikeRepository likeRepository;
 
