@@ -9,14 +9,14 @@ const themeColors = {
   accent: "#00BFFF", // Electric blue for highlights and focus elements
   background: "#F0F5FF", // Light blue-tinted white for a clean, focused look
   surface: "#E6EEFF", // Subtle blue tint for content areas
-  cardBg: "#FFFFFF", // Crisp white for cards and content blocks
-  textPrimary: "#2A3B52", // Dark blue-gray for readability and focus
-  textSecondary: "#5D7599", // Medium blue-gray for secondary information
-  border: "rgba(71, 118, 230, 0.15)", // Subtle blue-tinted border
-  hover: "#3A65C0", // Darker blue for hover states
-  danger: "#FF5252", // Clear red for warnings
-  success: "#22C55E", // Fresh green for success messages
-  gradient: "linear-gradient(135deg, #4776E6 0%, #8E54E9 100%)", // Blue to purple gradient for dynamic elements
+  cardBg: "#FFFFFF", 
+  textPrimary: "#2A3B52", 
+  textSecondary: "#5D7599", 
+  border: "rgba(71, 118, 230, 0.15)", 
+  hover: "#3A65C0", 
+  danger: "#FF5252", 
+  success: "#22C55E", 
+  gradient: "linear-gradient(135deg, #4776E6 0%, #8E54E9 100%)", 
 };
 const SkillShareBox = () => {
   const snap = useSnapshot(state);
@@ -32,36 +32,38 @@ const SkillShareBox = () => {
       onMouseLeave={() => setIsHovered(false)}
       style={{
         background: themeColors.gradient,
-        padding: "16px 20px",
-        borderRadius: "12px",
+        padding: "20px 24px",
+        borderRadius: "16px",
         boxShadow: isHovered 
-          ? "0 8px 24px rgba(90, 155, 255, 0.2)"
-          : "0 4px 12px rgba(0, 0, 0, 0.08)",
-        marginBottom: "20px",
+        ? "0 12px 30px rgba(90, 155, 255, 0.25)"
+        : "0 6px 18px rgba(0, 0, 0, 0.08)",
+        marginBottom: "24px",
         color: "white",
         cursor: "pointer",
-        transition: "all 0.3s ease",
-        transform: isHovered ? "translateY(-3px)" : "translateY(0)",
-        border: `1px solid ${isHovered ? "rgba(255, 255, 255, 0.2)" : "transparent"}`,
+        transition: "all 0.35s ease",
+        transform: isHovered ? "translateY(-5px) scale(1.02)" : "translateY(0) scale(1)",
+        border: `1px solid ${isHovered ? "rgba(255, 255, 255, 0.25)" : "transparent"}`,
         position: "relative",
-        overflow: "hidden"
+        overflow: "hidden",
+        backdropFilter: "blur(4px)", // a little smoothness
       }}
     >
       {/* Decorative circles matching the LearningProgressCard style */}
-      <div 
-        style={{ 
-          position: "absolute", 
-          right: -20, 
-          top: -20, 
-          width: 100, 
-          height: 100, 
-          borderRadius: "50%", 
-          background: "rgba(255,255,255,0.15)",
-          zIndex: 1,
-          transition: "transform 0.5s ease-in-out",
-          transform: isHovered ? "scale(1.2)" : "scale(1)"
-        }} 
-      />
+      <div
+    style={{
+      content: '""',
+      position: "absolute",
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
+      background: isHovered 
+        ? "radial-gradient(circle at center, rgba(255, 255, 255, 0.1) 0%, transparent 70%)"
+        : "transparent",
+      transition: "background 0.4s ease",
+      zIndex: 0,
+    }}
+  />
       
       <div 
         style={{ 

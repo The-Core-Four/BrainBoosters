@@ -117,198 +117,213 @@ const SkillShareCard = ({ plan }) => {
   return (
     <>
       <Card
-        style={{
-          width: "100%",
-          borderRadius: 12,
-          overflow: "hidden",
-          marginBottom: 16,
-          boxShadow: "0 4px 12px rgba(90, 155, 255, 0.12)",
-          border: `1px solid ${themeColors.border}`
-        }}
-        bodyStyle={{ padding: 0 }}
-        bordered={false}
+  style={{
+    width: "100%",
+    borderRadius: 16,
+    overflow: "hidden",
+    marginBottom: 24,
+    boxShadow: "0 8px 24px rgba(90, 155, 255, 0.15)",
+    border: `1px solid ${themeColors.border}`,
+    background: themeColors.cardBg,
+    transition: "box-shadow 0.3s ease, transform 0.3s ease",
+  }}
+  bodyStyle={{ padding: 0 }}
+  bordered={false}
+>
+  {/* Card Header */}
+  <div style={{
+    background: themeColors.gradient,
+    padding: "20px 24px",
+    borderTopLeftRadius: 16,
+    borderTopRightRadius: 16,
+    position: "relative",
+    overflow: "hidden",
+  }}>
+    {/* Decorative Circles */}
+    <div 
+      style={{ 
+        position: "absolute", 
+        right: -40, 
+        top: -40, 
+        width: 140, 
+        height: 140, 
+        borderRadius: "50%", 
+        background: "rgba(255,255,255,0.12)",
+        zIndex: 1
+      }} 
+    />
+    <div 
+      style={{ 
+        position: "absolute", 
+        right: 20, 
+        bottom: -50, 
+        width: 100, 
+        height: 100, 
+        borderRadius: "50%", 
+        background: "rgba(255,255,255,0.1)",
+        zIndex: 1
+      }} 
+    />
+    
+    {/* Title and Date */}
+    <Row justify="space-between" align="middle" style={{ position: "relative", zIndex: 2 }}>
+      <Col>
+        <Title level={4} style={{ margin: 0, color: "white", fontWeight: 600 }}>
+          Skill Sharing Post
+        </Title>
+      </Col>
+      <Col>
+        <Text style={{ color: "rgba(255, 255, 255, 0.85)", fontSize: 14 }}>
+          {new Date(plan.createdAt || Date.now()).toLocaleDateString()}
+        </Text>
+      </Col>
+    </Row>
+  </div>
+
+  {/* Media Section */}
+  <div style={{ padding: 0 }}>
+    {plan.mediaUrls && plan.mediaUrls.length > 0 ? (
+      <Carousel
+        autoplay={false}
+        dots={plan.mediaUrls.length > 1}
+        style={{ marginBottom: 16 }}
       >
-        <div style={{
-          background: themeColors.gradient,
-          padding: "16px 20px",
-          borderTopLeftRadius: 12,
-          borderTopRightRadius: 12,
-          position: "relative",
-          overflow: "hidden"
-        }}>
-          <div 
+        {plan.mediaUrls.map((url, index) => (
+          renderMediaItem(
+            url, 
+            plan.mediaTypes ? plan.mediaTypes[index] : "image",
+            index
+          )
+        ))}
+      </Carousel>
+    ) : (
+      <div style={{ 
+        height: 180, 
+        display: "flex", 
+        alignItems: "center", 
+        justifyContent: "center",
+        background: themeColors.surface,
+        color: themeColors.textSecondary,
+        fontSize: 16,
+        fontStyle: "italic",
+      }}>
+        No media available
+      </div>
+    )}
+  </div>
+
+  {/* Post Content */}
+  <div style={{ padding: "20px 24px" }}>
+    <Paragraph 
+      style={{ 
+        fontSize: 15, 
+        marginBottom: 16,
+        whiteSpace: "pre-line",
+        color: themeColors.textPrimary,
+        lineHeight: 1.6,
+      }}
+    >
+      <InfoCircleOutlined style={{ marginRight: 8, color: themeColors.primary }} />
+      <strong>Description:</strong> {plan.mealDetails}
+    </Paragraph>
+    
+    {/* Actions */}
+    <Row justify="space-between" align="middle" style={{ marginTop: 20 }}>
+      <Col>
+        <Space size="large">
+          <Button 
+            type="text" 
+            icon={liked ? <HeartFilled style={{ color: themeColors.danger }} /> : <HeartOutlined />}
+            onClick={() => setLiked(!liked)}
             style={{ 
-              position: "absolute", 
-              right: -30, 
-              top: -30, 
-              width: 120, 
-              height: 120, 
-              borderRadius: "50%", 
-              background: "rgba(255,255,255,0.15)",
-              zIndex: 1
-            }} 
-          />
-          <div 
-            style={{ 
-              position: "absolute", 
-              right: 20, 
-              bottom: -40, 
-              width: 80, 
-              height: 80, 
-              borderRadius: "50%", 
-              background: "rgba(255,255,255,0.15)",
-              zIndex: 1
-            }} 
-          />
-          
-          <Row justify="space-between" align="middle" style={{ position: "relative", zIndex: 2 }}>
-            <Col>
-              <Title level={4} style={{ margin: 0, color: "white" }}>
-                Skill Sharing Post
-              </Title>
-            </Col>
-            <Col>
-              <Text style={{ color: "rgba(255, 255, 255, 0.8)" }}>
-                {new Date(plan.createdAt || Date.now()).toLocaleDateString()}
-              </Text>
-            </Col>
-          </Row>
-        </div>
-        
-        <div style={{ padding: 0 }}>
-          {plan.mediaUrls && plan.mediaUrls.length > 0 ? (
-            <Carousel
-              autoplay={false}
-              dots={plan.mediaUrls.length > 1}
-              style={{ marginBottom: 16 }}
-            >
-              {plan.mediaUrls.map((url, index) => (
-                renderMediaItem(
-                  url, 
-                  plan.mediaTypes ? plan.mediaTypes[index] : "image",
-                  index
-                )
-              ))}
-            </Carousel>
-          ) : (
-            <div style={{ 
-              height: 150, 
-              display: "flex", 
-              alignItems: "center", 
-              justifyContent: "center",
-              background: themeColors.surface,
-              color: themeColors.textSecondary,
-              fontSize: 16
-            }}>
-              No media available
-            </div>
-          )}
-        </div>
-        
-        <div style={{ padding: "16px 24px", background: themeColors.cardBg }}>
-          <Paragraph 
-            style={{ 
-              fontSize: 15, 
-              marginBottom: 16,
-              whiteSpace: "pre-line",
-              color: themeColors.textPrimary
+              color: liked ? themeColors.danger : themeColors.textSecondary, 
+              fontWeight: liked ? 600 : 400
             }}
           >
-            <InfoCircleOutlined style={{ marginRight: 6 }} />
-            Description: {plan.mealDetails}
-          </Paragraph>
-          
-          <Row justify="space-between" align="middle" style={{ marginTop: 16 }}>
-            <Col>
-              <Space size="large">
-                <Button 
-                  type="text" 
-                  icon={liked ? <HeartFilled style={{ color: themeColors.danger }} /> : <HeartOutlined />}
-                  onClick={() => setLiked(!liked)}
-                  style={{ color: themeColors.textSecondary }}
-                >
-                  {liked ? "Liked" : "Like"}
-                </Button>
-                <Button 
-                  type="text" 
-                  icon={<MessageOutlined />}
-                  style={{ color: themeColors.textSecondary }}
-                >
-                  Comment
-                </Button>
-                <Button 
-                  type="text" 
-                  icon={<ShareAltOutlined />}
-                  style={{ color: themeColors.textSecondary }}
-                >
-                  Share
-                </Button>
-              </Space>
-            </Col>
-            
-            {plan.userId === snap.currentUser?.uid && (
-              <Col>
-                <Space>
-                  <Button
-                    onClick={() => {
-                      state.seletedSkillShareToUpdate = plan;
-                      state.updateSkillShareOpened = true;
-                    }}
-                    type="primary"
-                    icon={<EditOutlined />}
-                    style={{ 
-                      background: themeColors.primary, 
-                      borderColor: themeColors.primary,
-                      borderRadius: 8,
-                      transition: "all 0.2s",
-                      boxShadow: "0 2px 8px rgba(0, 123, 255, 0.2)"
-                    }}
-                  >
-                    Edit
-                  </Button>
-                  <Button
-                    onClick={deletePlan}
-                    loading={deleteLoading}
-                    danger
-                    icon={<DeleteOutlined />}
-                    style={{ 
-                      borderRadius: 8,
-                      transition: "all 0.2s"
-                    }}
-                  >
-                    Delete
-                  </Button>
-                </Space>
-              </Col>
-            )}
-          </Row>
-        </div>
-      </Card>
+            {liked ? "Liked" : "Like"}
+          </Button>
+          <Button 
+            type="text" 
+            icon={<MessageOutlined />}
+            style={{ color: themeColors.textSecondary }}
+          >
+            Comment
+          </Button>
+          <Button 
+            type="text" 
+            icon={<ShareAltOutlined />}
+            style={{ color: themeColors.textSecondary }}
+          >
+            Share
+          </Button>
+        </Space>
+      </Col>
       
-      <Modal
-        visible={previewVisible}
-        title="Media Preview"
-        footer={null}
-        onCancel={() => setPreviewVisible(false)}
-        width={800}
-        centered
-        bodyStyle={{ padding: 0 }}
-      >
-        {previewMedia.type === "image" ? (
-          <img
-            alt="Preview"
-            src={previewMedia.url}
-            style={{ width: "100%" }}
-          />
-        ) : (
-          <video
-            src={previewMedia.url}
-            controls
-            style={{ width: "100%" }}
-            autoPlay
-          />
-        )}
-      </Modal>
+      {plan.userId === snap.currentUser?.uid && (
+        <Col>
+          <Space>
+            <Button
+              onClick={() => {
+                state.seletedSkillShareToUpdate = plan;
+                state.updateSkillShareOpened = true;
+              }}
+              type="primary"
+              icon={<EditOutlined />}
+              style={{ 
+                background: themeColors.primary, 
+                borderColor: themeColors.primary,
+                borderRadius: 10,
+                boxShadow: "0 4px 10px rgba(0, 123, 255, 0.25)",
+                fontWeight: 600,
+              }}
+            >
+              Edit
+            </Button>
+            <Button
+              onClick={deletePlan}
+              loading={deleteLoading}
+              danger
+              icon={<DeleteOutlined />}
+              style={{ 
+                borderRadius: 10,
+                fontWeight: 600,
+              }}
+            >
+              Delete
+            </Button>
+          </Space>
+        </Col>
+      )}
+    </Row>
+  </div>
+</Card>
+
+{/* Modal for Media Preview */}
+<Modal
+  visible={previewVisible}
+  title="Media Preview"
+  footer={null}
+  onCancel={() => setPreviewVisible(false)}
+  width={800}
+  centered
+  bodyStyle={{ padding: 0 }}
+>
+  {previewMedia.type === "image" ? (
+    <img
+      alt="Preview"
+      src={previewMedia.url}
+      style={{ width: "100%", objectFit: "cover" }}
+    />
+  ) : (
+    <video
+      src={previewMedia.url}
+      controls
+      style={{ width: "100%", objectFit: "cover" }}
+      autoPlay
+    />
+  )}
+</Modal>
+
     </>
   );
 };
