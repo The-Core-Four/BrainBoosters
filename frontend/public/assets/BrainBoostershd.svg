@@ -1,0 +1,158 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+  <defs>
+    <!-- Gradient definitions -->
+    <linearGradient id="hubGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#9B6BF2" />
+      <stop offset="100%" stop-color="#7A41DA" />
+    </linearGradient>
+    
+    <linearGradient id="nodeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#33CCFF" />
+      <stop offset="100%" stop-color="#00AADD" />
+    </linearGradient>
+    
+    <!-- Pulsing animation for the central hub -->
+    <radialGradient id="pulseGradient" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+      <stop offset="0%" stop-color="#A979F5" stop-opacity="0.8">
+        <animate attributeName="stop-opacity" values="0.8;0.2;0.8" dur="3s" repeatCount="indefinite" />
+      </stop>
+      <stop offset="100%" stop-color="#7A41DA" stop-opacity="0">
+        <animate attributeName="stop-opacity" values="0;0.3;0" dur="3s" repeatCount="indefinite" />
+      </stop>
+    </radialGradient>
+    
+    <!-- Animation for connection paths -->
+    <filter id="glow" height="300%" width="300%" x="-100%" y="-100%">
+      <feGaussianBlur stdDeviation="5" result="blur" />
+      <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7" result="glow" />
+      <feBlend in="SourceGraphic" in2="glow" mode="normal" />
+    </filter>
+  </defs>
+  
+  <!-- Background elements -->
+  <circle cx="200" cy="200" r="180" fill="none" stroke="#F0F0F0" stroke-width="1" stroke-dasharray="3,3">
+    <animate attributeName="r" values="180;185;180" dur="10s" repeatCount="indefinite" />
+  </circle>
+  
+  <circle cx="200" cy="200" r="160" fill="none" stroke="#E8E8E8" stroke-width="1" stroke-dasharray="5,5">
+    <animate attributeName="r" values="160;167;160" dur="15s" repeatCount="indefinite" />
+    <animate attributeName="stroke-dasharray" values="5,5;7,3;5,5" dur="20s" repeatCount="indefinite" />
+  </circle>
+  
+  <!-- Pulsing background for central hub -->
+  <circle cx="200" cy="200" r="70" fill="url(#pulseGradient)" />
+  
+  <!-- Data flow animations along connection paths -->
+  <circle cx="0" cy="0" r="3" fill="#8E54E9">
+    <animateMotion path="M155,155 L125,125" dur="3s" repeatCount="indefinite" />
+  </circle>
+  <circle cx="0" cy="0" r="3" fill="#00BFFF">
+    <animateMotion path="M125,125 L155,155" dur="4s" repeatCount="indefinite" />
+  </circle>
+  
+  <circle cx="0" cy="0" r="3" fill="#8E54E9">
+    <animateMotion path="M245,155 L275,125" dur="2.5s" repeatCount="indefinite" />
+  </circle>
+  <circle cx="0" cy="0" r="3" fill="#00BFFF">
+    <animateMotion path="M275,125 L245,155" dur="3.5s" repeatCount="indefinite" />
+  </circle>
+  
+  <circle cx="0" cy="0" r="3" fill="#8E54E9">
+    <animateMotion path="M245,245 L275,275" dur="4s" repeatCount="indefinite" />
+  </circle>
+  <circle cx="0" cy="0" r="3" fill="#00BFFF">
+    <animateMotion path="M275,275 L245,245" dur="3s" repeatCount="indefinite" />
+  </circle>
+  
+  <circle cx="0" cy="0" r="3" fill="#8E54E9">
+    <animateMotion path="M155,245 L125,275" dur="2.7s" repeatCount="indefinite" />
+  </circle>
+  <circle cx="0" cy="0" r="3" fill="#00BFFF">
+    <animateMotion path="M125,275 L155,245" dur="3.7s" repeatCount="indefinite" />
+  </circle>
+  
+  <!-- Connections -->
+  <line x1="155" y1="155" x2="125" y2="125" stroke="url(#hubGradient)" stroke-width="3">
+    <animate attributeName="stroke-width" values="3;4;3" dur="2s" repeatCount="indefinite" />
+  </line>
+  <line x1="245" y1="155" x2="275" y2="125" stroke="url(#hubGradient)" stroke-width="3">
+    <animate attributeName="stroke-width" values="3;4;3" dur="3s" repeatCount="indefinite" />
+  </line>
+  <line x1="245" y1="245" x2="275" y2="275" stroke="url(#hubGradient)" stroke-width="3">
+    <animate attributeName="stroke-width" values="3;4;3" dur="2.5s" repeatCount="indefinite" />
+  </line>
+  <line x1="155" y1="245" x2="125" y2="275" stroke="url(#hubGradient)" stroke-width="3">
+    <animate attributeName="stroke-width" values="3;4;3" dur="4s" repeatCount="indefinite" />
+  </line>
+  
+  <!-- Central hub with shadow and animation -->
+  <circle cx="200" cy="200" r="50" fill="url(#hubGradient)">
+    <animate attributeName="r" values="50;52;50" dur="4s" repeatCount="indefinite" />
+    <filter id="dropShadow">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
+      <feOffset dx="2" dy="2" />
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="0.5" />
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </circle>
+  <text x="200" y="200" text-anchor="middle" dominant-baseline="middle" fill="white" font-family="Arial, sans-serif" font-weight="bold" font-size="14" filter="url(#glow)">Brain Boosters</text>
+  
+  <!-- Satellite nodes with animations -->
+  <circle cx="120" cy="120" r="30" fill="url(#nodeGradient)">
+    <animate attributeName="r" values="30;32;30" dur="5s" repeatCount="indefinite" />
+  </circle>
+  <text x="120" y="120" text-anchor="middle" dominant-baseline="middle" fill="white" font-family="Arial, sans-serif" font-weight="bold" font-size="14">GOALS</text>
+  
+  <circle cx="280" cy="120" r="30" fill="url(#nodeGradient)">
+    <animate attributeName="r" values="30;32;30" dur="6s" repeatCount="indefinite" />
+  </circle>
+  <text x="280" y="120" text-anchor="middle" dominant-baseline="middle" fill="white" font-family="Arial, sans-serif" font-weight="bold" font-size="14">SKILLS</text>
+  
+  <circle cx="280" cy="280" r="30" fill="url(#nodeGradient)">
+    <animate attributeName="r" values="30;32;30" dur="7s" repeatCount="indefinite" />
+  </circle>
+  <text x="280" y="280" text-anchor="middle" dominant-baseline="middle" fill="white" font-family="Arial, sans-serif" font-weight="bold" font-size="10">PROGRESS</text>
+  
+  <circle cx="120" cy="280" r="30" fill="url(#nodeGradient)">
+    <animate attributeName="r" values="30;32;30" dur="4s" repeatCount="indefinite" />
+  </circle>
+  <text x="120" y="280" text-anchor="middle" dominant-baseline="middle" fill="white" font-family="Arial, sans-serif" font-weight="bold" font-size="14">Abilities</text>
+  
+  <!-- Decorative elements with animations -->
+  <circle cx="350" cy="180" r="15" fill="#00BFFF" opacity="0.5">
+    <animate attributeName="cy" values="180;190;180" dur="8s" repeatCount="indefinite" />
+    <animate attributeName="opacity" values="0.5;0.7;0.5" dur="4s" repeatCount="indefinite" />
+  </circle>
+  <circle cx="50" cy="210" r="12" fill="#00BFFF" opacity="0.5">
+    <animate attributeName="cy" values="210;200;210" dur="7s" repeatCount="indefinite" />
+    <animate attributeName="opacity" values="0.5;0.7;0.5" dur="5s" repeatCount="indefinite" />
+  </circle>
+  <circle cx="200" cy="50" r="10" fill="#8E54E9" opacity="0.5">
+    <animate attributeName="cx" values="200;210;200" dur="9s" repeatCount="indefinite" />
+    <animate attributeName="opacity" values="0.5;0.7;0.5" dur="6s" repeatCount="indefinite" />
+  </circle>
+  <circle cx="200" cy="350" r="10" fill="#8E54E9" opacity="0.5">
+    <animate attributeName="cx" values="200;190;200" dur="10s" repeatCount="indefinite" />
+    <animate attributeName="opacity" values="0.5;0.7;0.5" dur="5s" repeatCount="indefinite" />
+  </circle>
+  
+  <!-- Small icons with animations -->
+  <path d="M350,220 L360,235 L340,235 Z" fill="#8E54E9" opacity="0.7">
+    <animateTransform attributeName="transform" type="rotate" from="0 350 220" to="360 350 220" dur="20s" repeatCount="indefinite" />
+  </path>
+  <path d="M65,150 L75,165 L55,165 Z" fill="#8E54E9" opacity="0.7">
+    <animateTransform attributeName="transform" type="rotate" from="0 65 150" to="360 65 150" dur="25s" repeatCount="indefinite" />
+  </path>
+  
+  <path d="M320,320 C325,315 335,315 340,320 C345,325 345,335 340,340 C335,345 325,345 320,340 C315,335 315,325 320,320 Z" fill="#00BFFF" opacity="0.7">
+    <animate attributeName="d" values="M320,320 C325,315 335,315 340,320 C345,325 345,335 340,340 C335,345 325,345 320,340 C315,335 315,325 320,320 Z; M318,318 C324,312 336,312 342,318 C348,324 348,336 342,342 C336,348 324,348 318,342 C312,336 312,324 318,318 Z; M320,320 C325,315 335,315 340,320 C345,325 345,335 340,340 C335,345 325,345 320,340 C315,335 315,325 320,320 Z" dur="15s" repeatCount="indefinite" />
+  </path>
+  <path d="M80,80 C85,75 95,75 100,80 C105,85 105,95 100,100 C95,105 85,105 80,100 C75,95 75,85 80,80 Z" fill="#00BFFF" opacity="0.7">
+    <animate attributeName="d" values="M80,80 C85,75 95,75 100,80 C105,85 105,95 100,100 C95,105 85,105 80,100 C75,95 75,85 80,80 Z; M78,78 C84,72 96,72 102,78 C108,84 108,96 102,102 C96,108 84,108 78,102 C72,96 72,84 78,78 Z; M80,80 C85,75 95,75 100,80 C105,85 105,95 100,100 C95,105 85,105 80,100 C75,95 75,85 80,80 Z" dur="12s" repeatCount="indefinite" />
+  </path>
+</svg>
