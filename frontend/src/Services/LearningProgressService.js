@@ -60,6 +60,7 @@ class LearningProgressService {
     }
   }
 
+  // Update LearningProgress
   async updateLearningProgress(id, LearningProgressData) {
     try {
       const accessToken = localStorage.getItem("accessToken");
