@@ -79,7 +79,7 @@ class LearningProgressService {
       throw new Error("Failed to update Learning Progress");
     }
   }
-
+// Delete LearningProgress
   async deleteLearningProgress(id) {
     try {
       const accessToken = localStorage.getItem("accessToken");
