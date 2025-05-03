@@ -21,6 +21,7 @@ class LearningProgressService {
     }
   }
 
+  
   async getLearningProgressById(id) {
     try {
       const accessToken = localStorage.getItem("accessToken");
@@ -39,6 +40,7 @@ class LearningProgressService {
     }
   }
 
+  // Create LearningProgress
   async CreateLearningProgressModal(LearningProgressData) {
     try {
       const accessToken = localStorage.getItem("accessToken");
