@@ -32,12 +32,13 @@ public class LearningProgressController {
         return new ResponseEntity<>(LearningProgresss, HttpStatus.OK);
     }
 
+    // Delete Learning Progress
     @PostMapping
     public ResponseEntity<LearningProgress> createLearningProgress(@RequestBody LearningProgress LearningProgress) {
         LearningProgress savedLearningProgress = LearningProgressRepository.save(LearningProgress);
         return new ResponseEntity<>(savedLearningProgress, HttpStatus.CREATED);
     }
-
+    
     @DeleteMapping("/{LearningProgressId}")
     public ResponseEntity<Void> deleteLearningProgress(@PathVariable String LearningProgressId) {
         LearningProgressRepository.deleteById(LearningProgressId);
