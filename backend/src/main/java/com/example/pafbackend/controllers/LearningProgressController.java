@@ -20,6 +20,7 @@ public class LearningProgressController {
         this.LearningProgressRepository = LearningProgressRepository;
     }
 
+    // Retrive Learning Progress
     @GetMapping
     public ResponseEntity<List<LearningProgress>> getLearningProgresss() {
         List<LearningProgress> LearningProgresss = LearningProgressRepository.findAll();
