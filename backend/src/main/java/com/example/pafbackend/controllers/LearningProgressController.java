@@ -47,6 +47,8 @@ public class LearningProgressController {
         LearningProgressRepository.deleteById(LearningProgressId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
+    // Update Learning Progress
     @PutMapping("/{LearningProgressId}")
     public ResponseEntity<LearningProgress> updateLearningProgress(@PathVariable String LearningProgressId, @RequestBody LearningProgress updatedLearningProgress) {
         Optional<LearningProgress> existingLearningProgressOptional = LearningProgressRepository.findById(LearningProgressId);
