@@ -32,6 +32,7 @@ const SkillShareBox = () => {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       style={{
+        
         background: "linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1))",
         borderRadius: "20px",
         backdropFilter: "blur(16px)",

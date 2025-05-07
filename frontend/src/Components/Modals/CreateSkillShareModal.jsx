@@ -293,6 +293,7 @@ const CreateSkillShareModal = () => {
           </Text>
         </div>
       }
+
       footer={null}
       open={snap.createSkillShareOpened}
       onCancel={handleCancel}
@@ -307,11 +308,13 @@ const CreateSkillShareModal = () => {
         maxHeight: '80vh',
         overflowY: 'auto',
       }}
+
       style={{
         borderRadius: 16,
         overflow: "hidden"
       }}
     >
+
       <Form form={form} layout="vertical" onFinish={handleSubmit} requiredMark="optional">
         
         {/* Skill Description Input */}
@@ -325,11 +328,13 @@ const CreateSkillShareModal = () => {
               fontWeight: 500,
               color: themeColors.textPrimary
             }}>
+
               <ShareAltOutlined style={{
                 marginRight: 12,
                 color: themeColors.primary,
                 fontSize: '1.25rem'
               }} />
+
               Skill Description
               <Tooltip title="Share detailed information about your skills or techniques">
                 <InfoCircleOutlined style={{
@@ -337,6 +342,7 @@ const CreateSkillShareModal = () => {
                   color: themeColors.textSecondary,
                   fontSize: '1rem'
                 }} />
+                
               </Tooltip>
             </div>
           }

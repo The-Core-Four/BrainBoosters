@@ -325,7 +325,6 @@ const SkillShareCard = ({ plan }) => {
                   >
                     Delete
                   </Button>
-
                 </Space>
               </Col>
             )}
@@ -342,12 +341,14 @@ const SkillShareCard = ({ plan }) => {
         centered
         bodyStyle={{ padding: 0 }}
       >
+
         {previewMedia.type === "image" ? (
           <img
             alt="Preview"
             src={previewMedia.url}
             style={{ width: "100%", objectFit: "cover" }}
           />
+
         ) : (
           <video
             src={previewMedia.url}
@@ -355,6 +356,7 @@ const SkillShareCard = ({ plan }) => {
             style={{ width: "100%", objectFit: "cover" }}
             autoPlay
           />
+          
         )}
       </Modal>
 
