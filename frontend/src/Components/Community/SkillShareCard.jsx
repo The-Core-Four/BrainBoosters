@@ -58,6 +58,8 @@ const SkillShareCard = ({ plan }) => {
     setPreviewVisible(true);
   };
 
+
+
   const renderMediaItem = (url, type, index) => {
     return type === "image" ? (
       <div key={index} className="media-container" onClick={() => handlePreview(url, type)}>
@@ -119,17 +121,20 @@ const SkillShareCard = ({ plan }) => {
       <Card
         style={{
           width: "100%",
-          borderRadius: 16,
+          borderRadius: 20,
           overflow: "hidden",
-          marginBottom: 24,
-          boxShadow: "0 8px 24px rgba(90, 155, 255, 0.15)",
+          marginBottom: 28,
+          boxShadow: "0 12px 30px rgba(90, 155, 255, 0.2)",
           border: `1px solid ${themeColors.border}`,
-          background: themeColors.cardBg,
-          transition: "box-shadow 0.3s ease, transform 0.3s ease",
+          background: `linear-gradient(135deg, ${themeColors.cardBg}, ${themeColors.cardBgSecondary || "#f5f7fa"})`,
+          transition: "box-shadow 0.4s ease, transform 0.4s ease",
+          backdropFilter: "blur(10px)",
+          WebkitBackdropFilter: "blur(10px)",
+          transform: "translateY(0)",
+          cursor: "pointer",
         }}
-        bodyStyle={{ padding: 0 }}
-        bordered={false}
       >
+
         {/* Card Header */}
         <div style={{
           background: themeColors.gradient,
@@ -164,7 +169,6 @@ const SkillShareCard = ({ plan }) => {
               zIndex: 1
             }}
           />
-
           {/* Title and Date */}
           <Row justify="space-between" align="middle" style={{ position: "relative", zIndex: 2 }}>
             <Col>
@@ -179,7 +183,6 @@ const SkillShareCard = ({ plan }) => {
             </Col>
           </Row>
         </div>
-
         {/* Media Section */}
         <div style={{ padding: 0 }}>
           {plan.mediaUrls && plan.mediaUrls.length > 0 ? (
@@ -294,17 +297,33 @@ const SkillShareCard = ({ plan }) => {
                     Edit
                   </Button>
                   <Button
-                    onClick={deletePlan}
+                    onClick={() => {
+                      deletePlan();
+                      alert('✅ Your post has been deleted!');
+                    }}
                     loading={deleteLoading}
                     danger
                     icon={<DeleteOutlined />}
                     style={{
-                      borderRadius: 10,
+                      borderRadius: '10px',
                       fontWeight: 600,
+                      backgroundColor: '#ff4d4f',
+                      border: 'none',
+                      color: '#fff',
+                      boxShadow: '0 4px 10px rgba(0,0,0,0.15)',
+                      transition: 'transform 0.2s ease',
+                    }}
+                    onMouseOver={(e) => {
+                      e.currentTarget.style.transform = 'scale(1.05)';
+                    }}
+                    onMouseOut={(e) => {
+                      e.currentTarget.style.transform = 'scale(1)';
                     }}
                   >
                     Delete
                   </Button>
+
+
                 </Space>
               </Col>
             )}
@@ -312,7 +331,6 @@ const SkillShareCard = ({ plan }) => {
         </div>
       </Card>
 
-      {/* Modal for Media Preview */}
       <Modal
         visible={previewVisible}
         title="Media Preview"
