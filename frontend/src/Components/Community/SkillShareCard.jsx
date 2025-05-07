@@ -58,8 +58,7 @@ const SkillShareCard = ({ plan }) => {
     setPreviewVisible(true);
   };
 
-
-
+  
   const renderMediaItem = (url, type, index) => {
     return type === "image" ? (
       <div key={index} className="media-container" onClick={() => handlePreview(url, type)}>
@@ -322,7 +321,6 @@ const SkillShareCard = ({ plan }) => {
                   >
                     Delete
                   </Button>
-
 
                 </Space>
               </Col>
