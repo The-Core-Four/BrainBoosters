@@ -3,6 +3,7 @@ import state from "../../Utils/Store";
 import { useSnapshot } from "valtio";
 
 // Theme colors (matching the previous component)
+
 const themeColors = {
   primary: "#4776E6", // Vibrant blue - energizing for brain/cognition
   secondary: "#8E54E9", // Rich purple - associated with creativity and wisdom
@@ -18,11 +19,13 @@ const themeColors = {
   success: "#22C55E",
   gradient: "linear-gradient(135deg, #4776E6 0%, #8E54E9 100%)",
 };
+
 const SkillShareBox = () => {
   const snap = useSnapshot(state);
   const [isHovered, setIsHovered] = useState(false);
 
   return (
+
     <div
       className="my_post"
       onClick={() => (state.createSkillShareOpened = true)}
@@ -46,6 +49,7 @@ const SkillShareBox = () => {
         overflow: "hidden",
       }}
     >
+
       {/* Ripple Effect */}
       <div
         style={{
@@ -82,6 +86,7 @@ const SkillShareBox = () => {
           zIndex: 2,
         }}
       >
+
         <img
           alt={snap.currentUser?.username || "Profile"}
           src={snap.currentUser?.image}
@@ -98,6 +103,7 @@ const SkillShareBox = () => {
             transform: isHovered ? "scale(1.15)" : "scale(1)",
           }}
         />
+
         <input
           type="text"
           placeholder={`✨ What skill are you sharing today, ${snap.currentUser?.username || "User"}?`}

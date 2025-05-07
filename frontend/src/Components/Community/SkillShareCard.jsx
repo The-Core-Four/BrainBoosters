@@ -73,6 +73,7 @@ const SkillShareCard = ({ plan }) => {
             cursor: "pointer"
           }}
         />
+
         <div className="media-overlay">
           <ExpandOutlined style={{ fontSize: 24, color: "white" }} />
         </div>
@@ -99,6 +100,7 @@ const SkillShareCard = ({ plan }) => {
           }
         `}</style>
       </div>
+
     ) : (
       <div key={index} className="media-container">
         <video
@@ -112,6 +114,7 @@ const SkillShareCard = ({ plan }) => {
           }}
         />
       </div>
+
     );
   };
 
@@ -293,6 +296,7 @@ const SkillShareCard = ({ plan }) => {
                       fontWeight: 600,
                     }}
                   >
+
                     Edit
                   </Button>
                   <Button
