@@ -268,104 +268,154 @@ const CreateSkillShareModal = () => {
   return (
     <Modal
       title={
-        <div style={{ 
-          borderBottom: `2px solid ${themeColors.secondary}`, 
-          paddingBottom: 8,
-          marginBottom: 8
+        <div style={{
+          borderBottom: `3px solid ${themeColors.secondary}`,
+          paddingBottom: 12,
+          marginBottom: 24,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "flex-start"
         }}>
-          <Title level={4} style={{ margin: 0, color: themeColors.textPrimary }}>
+          <Title level={3} style={{
+            margin: 0,
+            color: themeColors.textPrimary,
+            fontSize: '1.5rem',
+            fontWeight: '600'
+          }}>
             Share Your Skills
           </Title>
-          <Text type="secondary" style={{ fontSize: 14 }}>
-            Show your expertise and inspire the community
+          <Text type="secondary" style={{
+            fontSize: '0.9rem',
+            marginTop: 8,
+            color: themeColors.textSecondary
+          }}>
+            Show your expertise and inspire the community with your skills
           </Text>
         </div>
       }
       footer={null}
       open={snap.createSkillShareOpened}
       onCancel={handleCancel}
-      width={550}
+      width={600}
       centered
       destroyOnClose
-      bodyStyle={{ 
-        padding: "24px", 
+      bodyStyle={{
+        padding: "32px",
         background: themeColors.cardBg,
-        borderRadius: 12 
-      }}
-      style={{ 
         borderRadius: 16,
-        overflow: "hidden" 
+        boxShadow: "0 4px 15px rgba(0, 0, 0, 0.1)",
+        maxHeight: '80vh',
+        overflowY: 'auto',
+      }}
+      style={{
+        borderRadius: 16,
+        overflow: "hidden"
       }}
     >
       <Form form={form} layout="vertical" onFinish={handleSubmit} requiredMark="optional">
+        
+        {/* Skill Description Input */}
         <Form.Item
           name="mealDetails"
           label={
-            <div style={{ display: "flex", alignItems: "center" }}>
-              <ShareAltOutlined style={{ marginRight: 8, color: themeColors.primary }} />
-              <span style={{ color: themeColors.textPrimary, fontWeight: 500 }}>Skill Description</span>
+            <div style={{
+              display: "flex",
+              alignItems: "center",
+              fontSize: "1rem",
+              fontWeight: 500,
+              color: themeColors.textPrimary
+            }}>
+              <ShareAltOutlined style={{
+                marginRight: 12,
+                color: themeColors.primary,
+                fontSize: '1.25rem'
+              }} />
+              Skill Description
               <Tooltip title="Share detailed information about your skills or techniques">
-                <InfoCircleOutlined style={{ marginLeft: 8, color: themeColors.textSecondary }} />
+                <InfoCircleOutlined style={{
+                  marginLeft: 8,
+                  color: themeColors.textSecondary,
+                  fontSize: '1rem'
+                }} />
               </Tooltip>
             </div>
           }
           rules={[{ required: true, message: "Please share details about your skills" }]}
         >
-          <Input.TextArea 
-            placeholder="Describe your skills, techniques, or areas of expertise in detail" 
-            rows={4}
-            style={{ 
-              borderRadius: 8, 
+          <Input.TextArea
+            placeholder="Describe your skills, techniques, or areas of expertise in detail"
+            rows={5}
+            style={{
+              borderRadius: 10,
               borderColor: themeColors.border,
               padding: "12px",
-              fontSize: "15px",
+              fontSize: "16px",
               resize: "vertical",
-              boxShadow: "none",
-              transition: "all 0.3s ease"
+              transition: "all 0.3s ease",
+              background: themeColors.inputBg,
+              boxShadow: `0 4px 8px rgba(0, 0, 0, 0.05)`
             }}
           />
         </Form.Item>
-        
-        <div style={{ 
+  
+        {/* Media Upload Section */}
+        <div style={{
           background: themeColors.surface,
-          padding: "16px",
-          borderRadius: 12,
-          marginBottom: 16,
-          marginTop: 16
+          padding: "24px",
+          borderRadius: 16,
+          marginBottom: 24,
+          marginTop: 24,
+          boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)"
         }}>
           <Form.Item
             label={
-              <div style={{ display: "flex", alignItems: "center" }}>
-                <UploadOutlined style={{ marginRight: 8, color: themeColors.secondary }} />
-                <span style={{ color: themeColors.textPrimary, fontWeight: 500 }}>Media Upload</span>
-                <Tooltip title="Upload Max 3 photos or videos (max 30 sec) to showcase your skills">
-                  <InfoCircleOutlined style={{ marginLeft: 8, color: themeColors.textSecondary }} />
+              <div style={{
+                display: "flex",
+                alignItems: "center",
+                fontSize: "1rem",
+                fontWeight: 500,
+                color: themeColors.textPrimary
+              }}>
+                <UploadOutlined style={{
+                  marginRight: 12,
+                  color: themeColors.secondary,
+                  fontSize: '1.25rem'
+                }} />
+                Media Upload
+                <Tooltip title="Upload up to 3 photos or videos (max 30 sec) to showcase your skills">
+                  <InfoCircleOutlined style={{
+                    marginLeft: 8,
+                    color: themeColors.textSecondary,
+                    fontSize: '1rem'
+                  }} />
                 </Tooltip>
               </div>
             }
             rules={[{ required: mediaFiles.length === 0, message: "Please upload at least one media file" }]}
           >
-            <div 
-              style={{ 
-                border: `2px dashed ${themeColors.border}`, 
-                borderRadius: '8px', 
-                padding: '20px', 
+            <div
+              style={{
+                border: `2px dashed ${themeColors.border}`,
+                borderRadius: '16px',
+                padding: '24px',
                 textAlign: 'center',
                 background: themeColors.background,
                 cursor: mediaFiles.length >= 3 ? 'not-allowed' : 'pointer',
-                position: 'relative'
+                position: 'relative',
+                transition: "all 0.3s ease",
+                boxShadow: mediaFiles.length > 0 ? `0 4px 12px rgba(71, 118, 230, 0.2)` : "none"
               }}
               onDragOver={handleDragOver}
               onDrop={handleDrop}
             >
               <p><InboxOutlined style={{ fontSize: '48px', color: themeColors.primary }} /></p>
               <p style={{ margin: '8px 0', color: themeColors.textPrimary }}>
-                Click or drag files to this area to upload
+                Click or drag files here to upload
               </p>
               <p style={{ color: themeColors.textSecondary }}>
-                {mediaFiles.length >= 3 ? 
-                  "Maximum number of files reached" : 
-                  `Select up to ${3 - mediaFiles.length} files at once. Supports images and videos.`}
+                {mediaFiles.length >= 3 ?
+                  "Maximum files reached" :
+                  `You can upload up to ${3 - mediaFiles.length} files (images/videos).`}
               </p>
               <input
                 type="file"
@@ -373,7 +423,7 @@ const CreateSkillShareModal = () => {
                 accept="image/*,video/*"
                 onChange={handleFileInputChange}
                 disabled={mediaFiles.length >= 3 || uploadingMedia}
-                style={{ 
+                style={{
                   position: 'absolute',
                   top: 0,
                   left: 0,
@@ -385,48 +435,59 @@ const CreateSkillShareModal = () => {
               />
             </div>
             {uploadingMedia && (
-              <p style={{ 
-                color: themeColors.secondary, 
+              <p style={{
+                color: themeColors.secondary,
                 marginTop: 8,
-                textAlign: 'center',
-                fontStyle: 'italic'
+                fontStyle: 'italic',
+                textAlign: 'center'
               }}>
                 Media is uploading, please wait...
               </p>
             )}
           </Form.Item>
-          
+  
           {mediaFiles.length > 0 && renderMediaPreview()}
         </div>
-        
-        <Divider style={{ margin: "16px 0", borderColor: themeColors.border }} />
-        
-        <Form.Item style={{ marginBottom: 0, marginTop: 24 }}>
+  
+        {/* Divider */}
+        <Divider style={{
+          margin: "24px 0",
+          borderColor: themeColors.border,
+          borderWidth: "1px"
+        }} />
+  
+        {/* Action Buttons */}
+        <Form.Item style={{ marginBottom: 0 }}>
           <Space style={{ display: "flex", justifyContent: "flex-end" }}>
-            <Button 
+            <Button
               onClick={handleCancel}
-              style={{ 
-                borderRadius: 8,
+              style={{
+                borderRadius: 12,
                 borderColor: themeColors.border,
-                height: "40px",
-                padding: "0 16px" 
+                height: "45px",
+                padding: "0 20px",
+                background: themeColors.surface,
+                color: themeColors.textPrimary,
+                boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)"
               }}
             >
               Cancel
             </Button>
-            <Button 
-              type="primary" 
-              htmlType="submit" 
-              loading={loading} 
+            <Button
+              type="primary"
+              htmlType="submit"
+              loading={loading}
               disabled={mediaFiles.length === 0 || uploadingMedia}
               style={{
                 background: themeColors.gradient,
                 borderColor: themeColors.primary,
-                borderRadius: 8,
-                height: "40px",
-                padding: "0 20px",
+                borderRadius: 12,
+                height: "45px",
+                padding: "0 24px",
                 boxShadow: "0 4px 12px rgba(71, 118, 230, 0.3)",
-                transition: "all 0.3s ease"
+                transition: "all 0.3s ease",
+                fontWeight: "600",
+                textTransform: "uppercase"
               }}
             >
               {loading ? "Sharing..." : "Share Skill"}
@@ -436,6 +497,8 @@ const CreateSkillShareModal = () => {
       </Form>
     </Modal>
   );
+  
+  
 };
 
 export default CreateSkillShareModal;
