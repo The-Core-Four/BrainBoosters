@@ -58,21 +58,33 @@ public class SecurityConfig {
     UserDetailsManager userDetailsManager;
 
     @Bean
-    SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
-        return  http
-                .cors(cors->cors.configurationSource(corsConfiguration()))
-                .csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(auth -> {
-                      auth.requestMatchers( "/api/auth/register","/api/auth/login","/api/users/**").permitAll();
-                  auth.anyRequest().authenticated();
-                })
-                
-                .oauth2ResourceServer
-                        ((oauth2)->oauth2.jwt((jwt)->jwt.jwtAuthenticationConverter(jwtToUserConverter)))
-                .sessionManagement((session)->session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    return http
+            .cors(cors -> cors.configurationSource(corsConfiguration()))
+            .csrf(AbstractHttpConfigurer::disable)
+            .authorizeHttpRequests(auth -> {
+                auth.requestMatchers(
+                        "/api/auth/register", 
+                        "/api/auth/login", 
+                        "/api/users/**", 
+                        "/oauth2/**", 
+                        "/login/**").permitAll();
+                auth.anyRequest().authenticated();
+            })
+            .oauth2Login(oauth2 -> oauth2
+                .successHandler(oAuth2LoginSuccessHandler)
+            )
+            .oauth2ResourceServer(oauth2 -> 
+                oauth2.jwt(jwt -> 
+                    jwt.jwtAuthenticationConverter(jwtToUserConverter)
+                )
+            )
+            .sessionManagement(session -> 
+                session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+            )
+            .build();
+}
 
-                .build();
-    }
     @Bean
     CorsConfigurationSource corsConfiguration(){
         CorsConfiguration corsConfiguration = new CorsConfiguration();
