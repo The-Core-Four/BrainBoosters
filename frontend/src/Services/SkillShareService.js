@@ -3,7 +3,7 @@ import axios from "axios";
 const API_URL = "http://localhost:8080/api/SkillShares";
 
 const SkillShareService = {
-  // Get all Skill Shares
+
   getAllSkillShares: async () => {
     const accessToken = localStorage.getItem("accessToken");
     const config = {
@@ -11,6 +11,7 @@ const SkillShareService = {
         Authorization: `Bearer ${accessToken}`,
       },
     };
+    
     try {
       const response = await axios.get(API_URL, config);
       return response.data;
@@ -20,7 +21,7 @@ const SkillShareService = {
     }
   },
 
-  // Get Skill Shares by user ID
+
   getSkillSharesByUserId: async (userId) => {
     const accessToken = localStorage.getItem("accessToken");
     const config = {
@@ -28,6 +29,7 @@ const SkillShareService = {
         Authorization: `Bearer ${accessToken}`,
       },
     };
+
     try {
       const response = await axios.get(`${API_URL}/${userId}`, config);
       return response.data;
@@ -37,7 +39,7 @@ const SkillShareService = {
     }
   },
 
-  // Create a new Skill Share
+ 
   createSkillShare: async (SkillShareData) => {
     const accessToken = localStorage.getItem("accessToken");
     const config = {
@@ -45,6 +47,7 @@ const SkillShareService = {
         Authorization: `Bearer ${accessToken}`,
       },
     };
+
     try {
       const response = await axios.post(API_URL, SkillShareData, config);
       return response.data;
@@ -54,7 +57,7 @@ const SkillShareService = {
     }
   },
 
-  // Update an existing Skill Share
+
   updateSkillShare: async (SkillShareId, updatedSkillShareData) => {
     const accessToken = localStorage.getItem("accessToken");
     const config = {
@@ -62,6 +65,7 @@ const SkillShareService = {
         Authorization: `Bearer ${accessToken}`,
       },
     };
+
     try {
       const response = await axios.put(
         `${API_URL}/${SkillShareId}`,
@@ -75,7 +79,7 @@ const SkillShareService = {
     }
   },
 
-  // Delete a Skill Share by ID
+
   deleteSkillShare: async (SkillShareId) => {
     const accessToken = localStorage.getItem("accessToken");
     const config = {
@@ -88,7 +92,7 @@ const SkillShareService = {
       return; // No need to return anything for delete operation
     } catch (error) {
       console.error(`Error deleting Skill Share ${SkillShareId}:`, error);
-      throw error; // Throw the error to handle it in the component
+      throw error;
     }
   },
 };
