@@ -9,14 +9,14 @@ const themeColors = {
   accent: "#00BFFF", // Electric blue for highlights and focus elements
   background: "#F0F5FF", // Light blue-tinted white for a clean, focused look
   surface: "#E6EEFF", // Subtle blue tint for content areas
-  cardBg: "#FFFFFF", 
-  textPrimary: "#2A3B52", 
-  textSecondary: "#5D7599", 
-  border: "rgba(71, 118, 230, 0.15)", 
-  hover: "#3A65C0", 
-  danger: "#FF5252", 
-  success: "#22C55E", 
-  gradient: "linear-gradient(135deg, #4776E6 0%, #8E54E9 100%)", 
+  cardBg: "#FFFFFF",
+  textPrimary: "#2A3B52",
+  textSecondary: "#5D7599",
+  border: "rgba(71, 118, 230, 0.15)",
+  hover: "#3A65C0",
+  danger: "#FF5252",
+  success: "#22C55E",
+  gradient: "linear-gradient(135deg, #4776E6 0%, #8E54E9 100%)",
 };
 const SkillShareBox = () => {
   const snap = useSnapshot(state);
@@ -58,8 +58,7 @@ const SkillShareBox = () => {
           zIndex: 0,
         }}
       />
-  
-      
+
       <div
         style={{
           position: "absolute",
@@ -110,21 +109,18 @@ const SkillShareBox = () => {
             fontSize: 16,
             color: themeColors.textPrimary,
             background: "rgba(243, 243, 244, 0.95)",
-            boxShadow: isHovered
-              ? "0 4px 15px rgba(0, 0, 0, 0.15)"
-              : "0 2px 8px rgba(0, 0, 0, 0.1)",
-            transition: "box-shadow 0.4s ease, transform 0.3s ease",
+            boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)",
             outline: "none",
-            transform: isHovered ? "scale(1.04)" : "scale(1)",
           }}
           readOnly
           onClick={(e) => e.stopPropagation()}
         />
+
       </div>
     </div>
   );
-  
-  
+
+
 };
 
 export default SkillShareBox;

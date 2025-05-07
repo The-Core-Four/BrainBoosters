@@ -53,7 +53,7 @@ const SkillShareService = {
       return response.data;
     } catch (error) {
       console.error("Error creating Skill Share:", error);
-      throw error; // Throw the error to handle it in the component
+      throw error; 
     }
   },
 
@@ -95,6 +95,7 @@ const SkillShareService = {
       throw error;
     }
   },
+ 
 };
 
 export default SkillShareService;
