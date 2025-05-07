@@ -1,6 +1,5 @@
 package com.example.pafbackend.config;
 
-
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -14,8 +13,8 @@ import java.io.IOException;
 public class OAuth2LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws ServletException, IOException {
-       this.setAlwaysUseDefaultTargetUrl(true);
-        this.setDefaultTargetUrl("http://localhost:3000");
+        this.setAlwaysUseDefaultTargetUrl(true);
+        this.setDefaultTargetUrl("http://localhost:3000/community"); // Redirect to your React app
         super.onAuthenticationSuccess(request, response, authentication);
     }
 }

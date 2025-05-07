@@ -8,8 +8,8 @@ class OAuthService {
   // These should be stored securely in environment variables in production
   constructor() {
     // Google OAuth credentials
-    this.googleClientId = 'YOUR_GOOGLE_CLIENT_ID';
-    this.googleClientSecret = 'YOUR_GOOGLE_CLIENT_SECRET';
+    this.googleClientId = '125855925323-d54jdjburtgnqb1hebpd6otf5tmp1l4o.apps.googleusercontent.com';
+    this.googleClientSecret = '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';
     this.googleRedirectUri = `${window.location.origin}/auth/google/callback`;
     
     // GitHub OAuth credentials
