@@ -4,14 +4,7 @@ import { useSnapshot } from "valtio";
 import state from "../../Utils/Store";
 import SkillShareService from "../../Services/SkillShareService";
 import UploadFileService from "../../Services/UploadFileService";
-import { 
-  UploadOutlined, 
-  DeleteOutlined, 
-  InboxOutlined,
-  InfoCircleOutlined,
-  ShareAltOutlined,
-  FileImageOutlined
-} from "@ant-design/icons";
+import {UploadOutlined,DeleteOutlined,InboxOutlined,InfoCircleOutlined,ShareAltOutlined,FileImageOutlined} from "@ant-design/icons";
 
 const { Title, Text, Paragraph } = Typography;
 const uploader = new UploadFileService();
@@ -66,9 +59,9 @@ const CreateSkillShareModal = () => {
 
   const handleFileInputChange = async (e) => {
     const files = Array.from(e.target.files);
-    
+
     if (files.length === 0) return;
-    
+
     // Check if adding these files would exceed the limit
     if (mediaFiles.length + files.length > 3) {
       alert(`You can only upload up to 3 files in total. You've selected ${files.length} files but can only add ${3 - mediaFiles.length} more.`);
@@ -116,6 +109,7 @@ const CreateSkillShareModal = () => {
     }
   };
 
+  
   const validateVideoDuration = (file) => {
     return new Promise((resolve) => {
       const video = document.createElement('video');
@@ -125,7 +119,7 @@ const CreateSkillShareModal = () => {
         window.URL.revokeObjectURL(video.src);
         resolve(video.duration <= 30);
       };
-      
+
       video.src = URL.createObjectURL(file);
     });
   };
@@ -268,6 +262,7 @@ const CreateSkillShareModal = () => {
   return (
     <Modal
       title={
+        // Modal title content wrapped in a <div> for styling
         <div style={{
           borderBottom: `3px solid ${themeColors.secondary}`,
           paddingBottom: 12,
