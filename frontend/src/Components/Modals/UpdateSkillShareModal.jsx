@@ -180,80 +180,112 @@ const UpdateSkillShareModal = () => {
     <Modal
       open={snap.updateSkillShareOpened}
       footer={null}
+      centered
+      width={550}
       onCancel={() => {
         state.updateSkillShareOpened = false;
         state.seletedSkillShareToUpdate = null;
       }}
+      bodyStyle={{
+        padding: 24,
+        borderRadius: 12,
+        background: '#f9fafb',
+      }}
+      style={{
+        borderRadius: 16,
+        overflow: 'hidden',
+      }}
+      title={
+        <div style={{ borderBottom: '1px solid #e0e0e0', paddingBottom: 8 }}>
+          <h2 style={{ margin: 0, fontSize: 20, color: '#333' }}>Update Your Skill</h2>
+          <p style={{ margin: 0, fontSize: 14, color: '#888' }}>
+            Edit your description and media to inspire others.
+          </p>
+        </div>
+      }
     >
       <Form form={form} layout="vertical" onFinish={handleSubmit}>
         <Form.Item
           name="mealDetails"
-          label="Descriptions"
-          rules={[{ required: true, message: "Please enter Descriptions" }]}
+          label={<span style={{ fontWeight: 500 }}>Description</span>}
+          rules={[{ required: true, message: 'Please enter description' }]}
         >
-          <Input.TextArea />
+          <Input.TextArea
+            placeholder="Describe your skills or updates..."
+            rows={4}
+            style={{
+              borderRadius: 8,
+              padding: 12,
+              fontSize: 15,
+              borderColor: '#ddd',
+            }}
+          />
         </Form.Item>
-        {/* <Form.Item
-          name="dietaryPreferences"
-          label="Dietary Preferences"
-          rules={[
-            { required: true, message: "Please select dietary preferences" },
-          ]}
+  
+        <div
+          style={{
+            background: '#fff',
+            padding: 16,
+            borderRadius: 12,
+            marginBottom: 16,
+            border: '1px dashed #ddd',
+            textAlign: 'center',
+            cursor: mediaFiles.length >= 3 ? 'not-allowed' : 'pointer',
+          }}
         >
-          <Select>
-            <Option value="vegetarian">Vegetarian</Option>
-            <Option value="vegan">Vegan</Option>
-            <Option value="keto">Keto</Option>
-          </Select>
-        </Form.Item>
-        <Form.Item
-          name="ingredients"
-          label="Ingredients"
-          rules={[{ required: true, message: "Please enter ingredients" }]}
-        >
-          <Input.TextArea />
-        </Form.Item> */}
-        
-        {mediaFiles.length > 0 && renderMediaPreview()}
-        
-        {uploadingMedia && <p>Media is uploading, please wait...</p>}
-        
-        <Form.Item
-          label="Upload Media (up to 3 photos or videos, videos max 30 sec)"
-          rules={[{ required: mediaFiles.length === 0, message: "Please upload at least one media file" }]}
-        >
-          <Upload
-            accept="image/*,video/*"
-            beforeUpload={handleFileUpload}
-            showUploadList={false}
-            disabled={mediaFiles.length >= 3 || uploadingMedia}
+          <Form.Item
+            label={<span style={{ fontWeight: 500 }}>Upload Media (max 3 files, 30s video)</span>}
+            rules={[{ required: mediaFiles.length === 0, message: 'Please upload at least one media file' }]}
           >
-            <Button 
-              icon={<UploadOutlined />} 
+            <Upload
+              accept="image/*,video/*"
+              beforeUpload={handleFileUpload}
+              showUploadList={false}
               disabled={mediaFiles.length >= 3 || uploadingMedia}
             >
-              Upload Media
-            </Button>
-          </Upload>
-        </Form.Item>
-        
-        <Form.Item>
-          <Button 
-            type="primary" 
-            htmlType="submit" 
-            loading={loading} 
-            disabled={mediaFiles.length === 0 || uploadingMedia}
-            style={{
-              background: '#FF6B35', 
-              borderColor: '#FF6B35',
-            }}
-          >
-            Update Share Skill
-          </Button>
+              <Button
+                icon={<UploadOutlined />}
+                disabled={mediaFiles.length >= 3 || uploadingMedia}
+                style={{ borderRadius: 8 }}
+              >
+                Upload Media
+              </Button>
+            </Upload>
+          </Form.Item>
+  
+          {uploadingMedia && (
+            <p style={{ marginTop: 8, color: '#ff6b35', fontStyle: 'italic' }}>
+              Media is uploading, please wait...
+            </p>
+          )}
+        </div>
+  
+        {mediaFiles.length > 0 && renderMediaPreview()}
+  
+        <Form.Item style={{ marginTop: 24 }}>
+          <Button
+  type="primary"
+  htmlType="submit"
+  loading={loading}
+  disabled={mediaFiles.length === 0 || uploadingMedia}
+  style={{
+    background: '#3b82f6', // nice blue
+    borderColor: '#3b82f6',
+    width: '100%',
+    height: 44,
+    fontSize: 16,
+    borderRadius: 8,
+    boxShadow: '0 4px 12px rgba(59, 130, 246, 0.3)', // matching blue shadow
+  }}
+>
+  {loading ? 'Updating...' : 'Update Skill Share'}
+</Button>
+
         </Form.Item>
       </Form>
     </Modal>
   );
+  
 };
 
 export default UpdateSkillShareModal;
