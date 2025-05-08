@@ -25,7 +25,6 @@ jobs:
         run: |
           cd frontend
           npm install
-
       - name: Run build (ignore lint warnings in CI)
         run: |
           cd frontend

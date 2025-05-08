@@ -21,8 +21,7 @@
   "overrides": {
     "nth-check": "2.1.1",
     "postcss": "8.4.38",
-    "svgo": "3.0.2",
-    "undici": "6.22.0"
+    "svgo": "3.0.2"
   },
   "scripts": {
     "start": "react-scripts start",
