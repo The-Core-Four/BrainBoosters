@@ -1,5 +1,6 @@
-#
-Brain Bootsers
+
+## Brain Bootsers
+
 
 An interactive, community-driven web platform for sharing and learning new skills — from programming and photography to cooking and crafts. Our goal is to empower individuals to showcase their expertise, track their learning journeys, and connect with like-minded learners around the world.
 
