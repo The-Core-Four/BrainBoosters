@@ -23,7 +23,7 @@ import { message } from "antd";
 const Community = () => {
   const snap = useSnapshot(state);
   const navigate = useNavigate();
-  const [isAuthModalOpened, setIsAuthModalOpened] = useState(false);
+  const [ setIsAuthModalOpened] = useState(false);
 
   const getWorkoutStories = async () => {
     try {
