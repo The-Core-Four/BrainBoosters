@@ -54,9 +54,9 @@ An interactive, community-driven web platform for sharing and learning new skill
 ## 📂 Project Structure
 
 ```bash
-├── backend/               # Spring Boot backend
+├── backend/               
 │   ├── src/main/java/...
-├── frontend/              # React frontend
+├── frontend/              
 │   ├── src/
 ├── README.md
 ├── .gitignore
