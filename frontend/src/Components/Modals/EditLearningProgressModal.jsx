@@ -95,72 +95,78 @@ const EditLearningProgressModal = () => {
       footer={null}
       destroyOnClose={true}
       width={600}
+    > <Form
+    form={form}
+    layout="vertical"
+    onFinish={updateLearningProgress} // Function to handle form submission
+
+    // Set initial values based on selected plan (if available)
+    initialValues={{
+      planName: selectedPlan?.planName || "",
+      description: selectedPlan?.description || "",
+      routines: selectedPlan?.routines || "",
+      goal: selectedPlan?.goal || "",
+    }}
+  >
+    {/* Plan Name Input (Required) */}
+    <Form.Item
+      name="planName"
+      label="Plan Name"
+      rules={[{ required: true, message: "Please enter a plan name" }]}
     >
-      <Form
-        form={form}
-        layout="vertical"
-        onFinish={updateLearningProgress}
-        initialValues={{
-          planName: selectedPlan?.planName || "",
-          description: selectedPlan?.description || "",
-          routines: selectedPlan?.routines || "",
-          goal: selectedPlan?.goal || "",
-        }}
-      >
-        <Form.Item
-          name="planName"
-          label="Plan Name"
-          rules={[{ required: true, message: "Please enter a plan name" }]}
-        >
-          <Input 
-            placeholder="Enter plan name" 
-            style={{ borderRadius: 8 }}
-          />
-        </Form.Item>
+      <Input 
+        placeholder="Enter plan name" 
+        style={{ borderRadius: 8 }}
+      />
+    </Form.Item>
 
-        <Form.Item
-          name="description"
-          label="Description"
-        >
-          <TextArea 
-            placeholder="Describe your learning plan" 
-            autoSize={{ minRows: 3, maxRows: 6 }}
-            style={{ borderRadius: 8 }}
-          />
-        </Form.Item>
+    {/* Description Text Area */}
+    <Form.Item
+      name="description"
+      label="Description"
+    >
+      <TextArea 
+        placeholder="Describe your learning plan" 
+        autoSize={{ minRows: 3, maxRows: 6 }}
+        style={{ borderRadius: 8 }}
+      />
+    </Form.Item>
 
-        <Form.Item
-          name="routines"
-          label="Skills to Learn (comma separated)"
-        >
-          <Input 
-            placeholder="e.g. React, JavaScript, UI Design" 
-            style={{ borderRadius: 8 }}
-          />
-        </Form.Item>
+    {/* Routines / Skills Input */}
+    <Form.Item
+      name="routines"
+      label="Skills to Learn (comma separated)"
+    >
+      <Input 
+        placeholder="e.g. React, JavaScript, UI Design" 
+        style={{ borderRadius: 8 }}
+      />
+    </Form.Item>
 
-        <Form.Item
-          name="goal"
-          label="Tutorials & Resources"
-        >
-          <TextArea 
-            placeholder="List tutorials or resources for this plan" 
-            autoSize={{ minRows: 2, maxRows: 4 }}
-            style={{ borderRadius: 8 }}
-          />
-        </Form.Item>
+    {/* Tutorials and Resources Text Area */}
+    <Form.Item
+      name="goal"
+      label="Tutorials & Resources"
+    >
+      <TextArea 
+        placeholder="List tutorials or resources for this plan" 
+        autoSize={{ minRows: 2, maxRows: 4 }}
+        style={{ borderRadius: 8 }}
+      />
+    </Form.Item>
 
-        <Form.Item style={{ marginTop: 16 }}>
-          <Space style={{ display: "flex", justifyContent: "flex-end" }}>
-            <Button 
-              onClick={() => {
-                state.editLearningProgressOpened = false;
-                form.resetFields();
-              }}
-              style={{ 
-                borderRadius: 8, 
-                borderColor: themeColors.primary,
-              }}
+    {/* Action Buttons: Cancel & Submit */}
+    <Form.Item style={{ marginTop: 16 }}>
+      <Space style={{ display: "flex", justifyContent: "flex-end" }}>
+        <Button 
+          onClick={() => {
+            state.editLearningProgressOpened = false;
+            form.resetFields();
+          }}
+          style={{ 
+            borderRadius: 8, 
+            borderColor: themeColors.primary,
+          }}
             >
               Cancel
             </Button>
