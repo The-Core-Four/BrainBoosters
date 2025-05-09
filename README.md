@@ -28,7 +28,7 @@ An interactive, community-driven web platform for sharing and learning new skill
 ### 📚 Learning Plan Management
 - Create structured learning plans with topics, timelines, and resources.
 - Upload a representative image to visually enhance each learning plan.
-- Use predefined templates for easy progress tracking.
+- Use predefined templates to easily track progress and completed milestones.
 - Edit or delete plans as your journey evolves.
 - Learning plans are visible on public profiles (if not private).
 
