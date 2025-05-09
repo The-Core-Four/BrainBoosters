@@ -93,8 +93,8 @@ const CreateLearningProgressModal = () => {
       onCancel={handleCancel}
   
       width={550} // Modal width
-      centered // Center the modal vertically on the screen
-      destroyOnClose // Destroy content on close to reset internal state
+      centered 
+      destroyOnClose 
   
       // Custom body styling for padding, background color, and rounded corners
       bodyStyle={{ 
