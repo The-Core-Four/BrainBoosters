@@ -20,6 +20,7 @@ public class LearningProgressController {
         this.LearningProgressRepository = LearningProgressRepository;
     }
 
+    // Retrive Learning Progress
     @GetMapping
     public ResponseEntity<List<LearningProgress>> getLearningProgresss() {
         List<LearningProgress> LearningProgresss = LearningProgressRepository.findAll();
@@ -32,17 +33,22 @@ public class LearningProgressController {
         return new ResponseEntity<>(LearningProgresss, HttpStatus.OK);
     }
 
+    
+    // Create Learning Progress
     @PostMapping
     public ResponseEntity<LearningProgress> createLearningProgress(@RequestBody LearningProgress LearningProgress) {
         LearningProgress savedLearningProgress = LearningProgressRepository.save(LearningProgress);
         return new ResponseEntity<>(savedLearningProgress, HttpStatus.CREATED);
     }
-
+    
+    // Delete Learning Progress
     @DeleteMapping("/{LearningProgressId}")
     public ResponseEntity<Void> deleteLearningProgress(@PathVariable String LearningProgressId) {
         LearningProgressRepository.deleteById(LearningProgressId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
+    // Update Learning Progress
     @PutMapping("/{LearningProgressId}")
     public ResponseEntity<LearningProgress> updateLearningProgress(@PathVariable String LearningProgressId, @RequestBody LearningProgress updatedLearningProgress) {
         Optional<LearningProgress> existingLearningProgressOptional = LearningProgressRepository.findById(LearningProgressId);

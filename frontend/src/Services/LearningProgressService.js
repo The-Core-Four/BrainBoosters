@@ -4,6 +4,7 @@ import axios from "axios";
 
 const BASE_URL = "http://localhost:8080/api";
 
+// Retrive LearningProgress
 class LearningProgressService {
   async getAllLearningProgresss() {
     try {
@@ -20,6 +21,7 @@ class LearningProgressService {
     }
   }
 
+  
   async getLearningProgressById(id) {
     try {
       const accessToken = localStorage.getItem("accessToken");
@@ -38,6 +40,7 @@ class LearningProgressService {
     }
   }
 
+  // Create LearningProgress
   async CreateLearningProgressModal(LearningProgressData) {
     try {
       const accessToken = localStorage.getItem("accessToken");
@@ -57,6 +60,7 @@ class LearningProgressService {
     }
   }
 
+  // Update LearningProgress
   async updateLearningProgress(id, LearningProgressData) {
     try {
       const accessToken = localStorage.getItem("accessToken");
@@ -75,7 +79,7 @@ class LearningProgressService {
       throw new Error("Failed to update Learning Progress");
     }
   }
-
+// Delete LearningProgress
   async deleteLearningProgress(id) {
     try {
       const accessToken = localStorage.getItem("accessToken");
