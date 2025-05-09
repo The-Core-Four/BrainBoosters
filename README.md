@@ -30,7 +30,7 @@ An interactive, community-driven web platform for sharing and learning new skill
 - Upload a representative image to visually enhance each learning plan.
 - Use predefined templates to easily track progress and completed milestones.
 - Edit or delete learning plans anytime as goals or priorities change.
-- Learning plans are visible on public profiles (if not private).
+- Learning plans are visible on public profiles, unless the user sets their profile to private.
 
 ### 💬 Comments & Likes System
 - Like posts to show support or appreciation.
