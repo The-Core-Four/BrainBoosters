@@ -67,31 +67,46 @@ const CreateLearningProgressModal = () => {
 
   return (
     <Modal
+      // Custom modal title with border and subtitle
       title={
         <div style={{ 
           borderBottom: `2px solid ${themeColors.secondary}`, 
           paddingBottom: 8,
           marginBottom: 8
         }}>
+          {/* Main title of the modal */}
           <Title level={4} style={{ margin: 0, color: themeColors.textPrimary }}>
             Share Learning Progress
           </Title>
+  
+          {/* Subtitle to guide the user */}
           <Text type="secondary" style={{ fontSize: 14 }}>
             Document your journey and inspire others
           </Text>
         </div>
       }
-      footer={null}
-      visible={snap.CreateLearningProgressModalOpened}
+  
+      footer={null} // No default footer buttons
+      visible={snap.CreateLearningProgressModalOpened} // Modal visibility based on state
+  
+      // Function to handle modal close
       onCancel={handleCancel}
-      width={550}
-      centered
-      destroyOnClose
+  
+      width={550} // Modal width
+      centered // Center the modal vertically on the screen
+      destroyOnClose // Destroy content on close to reset internal state
+  
+      // Custom body styling for padding, background color, and rounded corners
       bodyStyle={{ 
         padding: "24px", 
         background: themeColors.cardBg,
         borderRadius: 12 
       }}
+    >
+      {/* Modal content goes here */}
+    </Modal>
+  );
+  
       style={{ 
         borderRadius: 16,
         overflow: "hidden" 
