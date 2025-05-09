@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collections;
 import java.util.List;
 import org.springframework.data.mongodb.core.index.Indexed;
+// user onboarding
 @Document(collection = "users")
 @Data
 @Setter
