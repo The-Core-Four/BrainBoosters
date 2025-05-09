@@ -85,6 +85,7 @@ const EditLearningProgressModal = () => {
 
   return (
     <Modal
+    // Modal title with styled heading
       title={<Title level={4} style={{ color: themeColors.textPrimary }}>Edit Learning Plan</Title>}
       open={snap.editLearningProgressOpened}
       onCancel={() => {
