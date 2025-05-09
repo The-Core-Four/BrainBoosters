@@ -257,7 +257,7 @@ const UserProfileModal = () => {
           rules={[{ required: true, message: "Please enter your skill goals" }]}
         >
           <TextArea
-            placeholder="What skills do you want to achieve?"
+            placeholder="What skill goals do you want to achieve?"
             autoSize={{ minRows: 2, maxRows: 4 }}
           />
         </Form.Item>
@@ -292,7 +292,7 @@ const UserProfileModal = () => {
             borderTop: "1px solid #f0f0f0",
           }}
         >
-          <Tooltip title="Log out of your account">
+          <Tooltip title="Log out from your account">
             <Button icon={<LogoutOutlined />} danger onClick={handleLogout}>
               Log Out
             </Button>
