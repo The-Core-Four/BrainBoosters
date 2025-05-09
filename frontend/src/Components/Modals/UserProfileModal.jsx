@@ -1,57 +1,56 @@
 import React, { useState, useEffect } from "react";
-import { 
-  Modal, 
-  Switch, 
-  Input, 
-  Button, 
-  Upload, 
-  message, 
-  Form, 
-  Divider, 
-  Avatar, 
-  Tooltip, 
-  Space
+import {
+  Modal,
+  Switch,
+  Input,
+  Button,
+  Upload,
+  message,
+  Form,
+  Divider,
+  Avatar,
+  Tooltip,
+  Space,
 } from "antd";
-import { 
-  UploadOutlined, 
-  UserOutlined, 
-  EditOutlined, 
-  LockOutlined, 
-  UnlockOutlined, 
-  LogoutOutlined, 
-  ProfileOutlined, 
-  AimOutlined
+import {
+  UploadOutlined,
+  UserOutlined,
+  EditOutlined,
+  LockOutlined,
+  UnlockOutlined,
+  LogoutOutlined,
+  ProfileOutlined,
+  AimOutlined,
+  BulbOutlined,
 } from "@ant-design/icons";
 import { useSnapshot } from "valtio";
 import state from "../../Utils/Store";
 import UploadFileService from "../../Services/UploadFileService";
 import UserService from "../../Services/UserService";
 import { useNavigate } from "react-router-dom";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 
 const { TextArea } = Input;
 const uploader = new UploadFileService();
+const genAI = new GoogleGenerativeAI("AIzaSyBf7I5bOeT6Tk4I8OsGQhOUgQcVmdgzxRc");
+const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
 const UserProfileModal = () => {
   const snap = useSnapshot(state);
   const [form] = Form.useForm();
   const [uploadUserLoading, setUploadUserLoading] = useState(false);
   const [updateLoading, setUpdateLoading] = useState(false);
+  const [aiLoading, setAiLoading] = useState({ bio: false, goal: false });
   const navigate = useNavigate();
-  
-  // Get user data from localStorage if state doesn't have it
+
   const getUserData = () => {
-    if (snap.currentUser) {
-      return snap.currentUser;
-    }
-    
-    const storedUser = localStorage.getItem('currentUser');
+    if (snap.currentUser) return snap.currentUser;
+    const storedUser = localStorage.getItem("currentUser");
     if (storedUser) {
       const parsedUser = JSON.parse(storedUser);
-      // Update state with user from localStorage
       state.currentUser = parsedUser;
       return parsedUser;
     }
-    
     return {
       username: "",
       biography: "",
@@ -61,46 +60,20 @@ const UserProfileModal = () => {
       uid: "",
     };
   };
-  
+
   const [updatedUser, setUpdatedUser] = useState(getUserData());
-  
-  // Reset form values when currentUser changes
+
   useEffect(() => {
     const userData = getUserData();
     setUpdatedUser(userData);
-    
     form.setFieldsValue({
       username: userData.username,
       biography: userData.biography,
       fitnessGoals: userData.fitnessGoals,
       profileVisibility: userData.profileVisibility,
-      image: userData.image
+      image: userData.image,
     });
   }, [snap.currentUser, form]);
-
-  // Modal styling
-  const modalStyle = {
-    borderRadius: "12px",
-    overflow: "hidden"
-  };
-  
-  const footerStyle = {
-    display: "flex",
-    justifyContent: "space-between",
-    padding: "10px 16px",
-    borderTop: "1px solid #f0f0f0"
-  };
-
-  const profileImageStyle = {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-    margin: "16px 0",
-    padding: "16px",
-    borderRadius: "8px",
-    backgroundColor: "#f9f9f9"
-  };
 
   const closeModal = () => {
     state.profileModalOpend = false;
@@ -109,22 +82,15 @@ const UserProfileModal = () => {
   const handleUpdate = async (values) => {
     try {
       setUpdateLoading(true);
-      
       const updatedUserData = {
         ...updatedUser,
         biography: values.biography,
         fitnessGoals: values.fitnessGoals,
-        profileVisibility: values.profileVisibility
+        profileVisibility: values.profileVisibility,
       };
-      
       await UserService.updateUserPrifile(updatedUserData);
-      
-      // Update state
       state.currentUser = updatedUserData;
-      
-      // Save to localStorage
-      localStorage.setItem('currentUser', JSON.stringify(updatedUserData));
-      
+      localStorage.setItem("currentUser", JSON.stringify(updatedUserData));
       closeModal();
       message.success("Profile updated successfully");
     } catch (error) {
@@ -150,21 +116,16 @@ const UserProfileModal = () => {
           info.fileList[0].originFileObj,
           "userImages"
         );
-        
         const updatedUserData = { ...updatedUser, image: url };
         setUpdatedUser(updatedUserData);
-        
-        // Update localStorage with new image
-        const storedUser = localStorage.getItem('currentUser');
+        const storedUser = localStorage.getItem("currentUser");
         if (storedUser) {
           const parsedUser = JSON.parse(storedUser);
           parsedUser.image = url;
-          localStorage.setItem('currentUser', JSON.stringify(parsedUser));
-          // Update state as well
+          localStorage.setItem("currentUser", JSON.stringify(parsedUser));
           state.currentUser = parsedUser;
         }
-        
-        form.setFieldValue('image', url);
+        form.setFieldValue("image", url);
         message.success("Image uploaded successfully");
       } catch (error) {
         console.error("Error uploading image:", error);
@@ -172,6 +133,24 @@ const UserProfileModal = () => {
       } finally {
         setUploadUserLoading(false);
       }
+    }
+  };
+
+  const generateSuggestion = async (type) => {
+    try {
+      setAiLoading((prev) => ({ ...prev, [type]: true }));
+      const prompt =
+        type === "bio"
+          ? `Write a short professional biography for a person named ${updatedUser.username}.`
+          : `Suggest skill development goals for a person named ${updatedUser.username} who wants to improve themselves.`;
+      const result = await model.generateContent(prompt);
+      const text = result.response.text().trim();
+      form.setFieldValue(type === "bio" ? "biography" : "fitnessGoals", text);
+    } catch (error) {
+      console.error("AI suggestion error:", error);
+      message.error("Failed to generate suggestion.");
+    } finally {
+      setAiLoading((prev) => ({ ...prev, [type]: false }));
     }
   };
 
@@ -188,27 +167,26 @@ const UserProfileModal = () => {
       width={500}
       centered
       bodyStyle={{ padding: "12px 20px", maxHeight: "600px", overflowY: "auto" }}
-      style={modalStyle}
+      style={{ borderRadius: "12px", overflow: "hidden" }}
     >
-      <Form
-        form={form}
-        layout="vertical"
-        initialValues={{
-          username: updatedUser.username,
-          biography: updatedUser.biography,
-          fitnessGoals: updatedUser.fitnessGoals,
-          profileVisibility: updatedUser.profileVisibility,
-          image: updatedUser.image
-        }}
-        onFinish={handleUpdate}
-      >
-        <div style={profileImageStyle}>
-          <Avatar 
-            size={100} 
+      <Form form={form} layout="vertical" onFinish={handleUpdate}>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            margin: "16px 0",
+            padding: "16px",
+            borderRadius: "8px",
+            backgroundColor: "#f9f9f9",
+          }}
+        >
+          <Avatar
+            size={100}
             src={updatedUser.image}
             icon={!updatedUser.image && <UserOutlined />}
           />
-          
           <Form.Item name="image" style={{ marginTop: "16px", marginBottom: 0 }}>
             <Upload
               accept="image/*"
@@ -217,8 +195,8 @@ const UserProfileModal = () => {
               beforeUpload={() => false}
               maxCount={1}
             >
-              <Button 
-                icon={<UploadOutlined />} 
+              <Button
+                icon={<UploadOutlined />}
                 loading={uploadUserLoading}
                 type="primary"
                 ghost
@@ -258,6 +236,15 @@ const UserProfileModal = () => {
             autoSize={{ minRows: 3, maxRows: 5 }}
           />
         </Form.Item>
+        <Button
+          icon={<BulbOutlined />}
+          onClick={() => generateSuggestion("bio")}
+          loading={aiLoading.bio}
+          block
+          style={{ marginBottom: 12 }}
+        >
+          Suggest Biography with AI
+        </Button>
 
         <Form.Item
           name="fitnessGoals"
@@ -274,6 +261,14 @@ const UserProfileModal = () => {
             autoSize={{ minRows: 2, maxRows: 4 }}
           />
         </Form.Item>
+        <Button
+          icon={<BulbOutlined />}
+          onClick={() => generateSuggestion("goal")}
+          loading={aiLoading.goal}
+          block
+        >
+          Suggest Skill Goals with AI
+        </Button>
 
         <Form.Item
           name="profileVisibility"
@@ -285,29 +280,25 @@ const UserProfileModal = () => {
           }
           valuePropName="checked"
         >
-          <Switch 
-            checkedChildren="Public" 
-            unCheckedChildren="Private"
-          />
+          <Switch checkedChildren="Public" unCheckedChildren="Private" />
         </Form.Item>
 
         <Divider />
-        
-        <div style={footerStyle}>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            padding: "10px 16px",
+            borderTop: "1px solid #f0f0f0",
+          }}
+        >
           <Tooltip title="Log out of your account">
-            <Button 
-              icon={<LogoutOutlined />} 
-              danger 
-              onClick={handleLogout}
-            >
+            <Button icon={<LogoutOutlined />} danger onClick={handleLogout}>
               Log Out
             </Button>
           </Tooltip>
-          
           <Space>
-            <Button onClick={closeModal}>
-              Cancel
-            </Button>
+            <Button onClick={closeModal}>Cancel</Button>
             <Button
               type="primary"
               htmlType="submit"
