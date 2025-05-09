@@ -29,7 +29,7 @@ An interactive, community-driven web platform for sharing and learning new skill
 - Create structured learning plans with topics, timelines, and resources.
 - Upload a representative image to visually enhance each learning plan.
 - Use predefined templates to easily track progress and completed milestones.
-- Edit or delete plans as your journey evolves.
+- Edit or delete learning plans anytime as goals or priorities change.
 - Learning plans are visible on public profiles (if not private).
 
 ### 💬 Comments & Likes System
