@@ -8,6 +8,7 @@ An interactive, community-driven web platform for sharing and learning new skill
 
 ## 🚀 Features
 
+
 ### 🧠 Skill Sharing Posts
 - Share your knowledge and experiences with the community.
 - Add up to 3 images or 30-second videos to each post.
@@ -22,6 +23,7 @@ An interactive, community-driven web platform for sharing and learning new skill
 - Follow/unfollow users to stay updated.
 - Share quick thoughts through story updates.
 - Search users by name or interest.
+- AI Feature available 
 
 ### 📚 Learning Plan Management
 - Create structured learning plans with topics, timelines, and resources.
