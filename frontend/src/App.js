@@ -11,8 +11,10 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/community" element={<Community />} />
       </Routes>
+      
     </BrowserRouter>
   );
 }
+
 
 export default App;

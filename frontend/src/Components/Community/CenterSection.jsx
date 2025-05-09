@@ -106,7 +106,6 @@ const CenterSection = () => {
               ))}
             </Row>
           </TabPane>
-          
           <TabPane tab="Friends" key="4">
             <FriendsSection />
           </TabPane>
