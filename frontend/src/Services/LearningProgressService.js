@@ -21,7 +21,7 @@ class LearningProgressService {
     }
   }
 
-  
+  // Retrive LearningProgress
   async getLearningProgressById(id) {
     try {
       const accessToken = localStorage.getItem("accessToken");
