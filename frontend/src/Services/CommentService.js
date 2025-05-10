@@ -13,8 +13,33 @@ class CommentService {
    */
   async createComment(commentData, username, userId) {
     try {
+      // ----------------------------
+      // Validation Section
+      // ----------------------------
+
+      // Validate commentData is an object and not null
+      if (!commentData || typeof commentData !== "object") {
+        throw new Error("Invalid comment data");
+      }
+
+      // Validate username is a non-empty string
+      if (!username || typeof username !== "string") {
+        throw new Error("Username is required and must be a string");
+      }
+
+      // Validate userId is a non-empty string
+      if (!userId || typeof userId !== "string") {
+        throw new Error("User ID is required and must be a string");
+      }
+
       // Get access token from localStorage for authentication
       const accessToken = localStorage.getItem("accessToken");
+
+      // Check if access token is present
+      if (!accessToken) {
+        throw new Error("Authentication token is missing");
+      }
+
       const config = {
         headers: {
           Authorization: `Bearer ${accessToken}`, // Set authorization header
@@ -29,7 +54,7 @@ class CommentService {
       );
 
       // If comment creation is successful, create notification
-      if (response.status === 200) {
+      if (response.status === 200 || response.status === 201) {
         try {
           const body = {
             userId: userId,
@@ -43,6 +68,7 @@ class CommentService {
           // Empty catch to ensure comment creation isn't affected by notification failure
         }
       }
+
       return response.data;
     } catch (error) {
       throw new Error("Failed to create comment");
